@@ -7,6 +7,34 @@ $(document).ready(function () {
   var modalCloseButton = $(".modal-close-button");
   var viewFlatsButton = $(".view-flats");
 
+  var flatPath = $(".flats path"); // каждая квартира на этаже
+  var listPath = $(".flat-list li");
+
+  // функция при наведении мыши на квартиру
+  flatPath.on("mouseover", function () {
+    var currentFlat = $(this).attr("data-flat");
+    
+    // поставить выделение правой секции для актовного элемента
+    var selectedFlat = $(`[data-li=${currentFlat}]`);
+    selectedFlat.toggleClass("current-flat");
+  });
+
+  //снять выделение с элемента списка
+  flatPath.on("mouseout", function () {
+    $(`[data-li]`).removeClass('current-flat');
+  });
+
+  // список при наведении мыши на квартиру
+  listPath.on("mouseover", function () {
+    var currentListElem = $(this).attr("data-li");
+    var selectedListElem = $(`[data-flat=${currentListElem}]`);
+    selectedListElem.toggleClass("current-list-elem");
+  });
+
+  listPath.on("mouseout", function () {
+    $(`[data-flat]`).removeClass('current-list-elem');
+  });
+
    // фунуция при наведении мышью на этаж
   floorPath.on("mouseover", function () {
      floorPath.removeClass("current-floor"); //удаляем активный класс у этажей
